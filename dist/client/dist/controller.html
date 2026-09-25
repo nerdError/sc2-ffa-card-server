@@ -1,16 +1,30 @@
 <!doctype html>
 <html lang="ru">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Controller</title>
-    <style>body{color:#eee;background:#111;margin:0;padding:16px;font-family:system-ui,sans-serif}h1{margin:0 0 12px;font-size:18px}.grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;display:grid}button{cursor:pointer;color:#fff;text-align:left;word-break:break-word;background:#2a2a2a;border:1px solid #444;border-radius:10px;padding:16px;font-size:15px}button:active{background:#3a3a3a}.status{color:#0f0;margin-top:12px;font:12px monospace}</style>
-    <script type="module" crossorigin src="/assets/controller-DZcMxyjc.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-P2Xu9kJm.js">
-  </head>
-  <body>
-    <h1>Controller</h1>
+    <style>body{color:#eee;background:#111;margin:0;padding:16px;font-family:system-ui,sans-serif}h1{margin:0 0 12px;font-size:18px}.grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;display:grid}button{cursor:pointer;color:#fff;text-align:left;word-break:break-word;background:#2a2a2a;border:1px solid #444;border-radius:10px;padding:16px;font-size:15px}button:active{background:#3a3a3a}.status{font-family:system-ui,sans-serif;font:12px;color:#0f0}#hide{border:1px solid #934949a4a;background:#5a2d2d}#hide:active{background:#743a3a}#hide-div{margin-top:20px;display:grid}.toggle-pill-dark{margin-top:15px;display:flex}.toggle-pill-dark input[type=checkbox]{display:none}.toggle-pill-dark #text{margin-left:10px}.toggle-pill-dark input[type=checkbox]+label{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;background:#303e58;border-radius:1em;width:3em;height:1.6em;margin-bottom:20px;transition:background .1s ease-in-out;display:block;position:relative;box-shadow:inset 0 0 5px #0000004d}.toggle-pill-dark input[type=checkbox]+label:before{content:"";background:#e84d4d;border-radius:1em;width:1.2em;height:1.2em;transition:all .2s ease-in-out;display:block;position:absolute;top:.2em;left:.2em;transform:rotate(90deg)}.toggle-pill-dark input[type=checkbox]:checked+label:before{background:#47cf73;left:1.6em;transform:rotate(295deg);box-shadow:-2px 0 5px #0003}</style>
+  <script type="module" crossorigin src="/assets/controller-CDLL7T1i.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-P2Xu9kJm.js">
+</head>
+
+<body>
+    <div style="display: flex;">
+        <h1>Controller</h1>
+        <h1 class="status" id="status" style="margin-left: 10px; opacity: 75%;">  Подключение…</h1>
+    </div>
     <div class="grid" id="grid"></div>
-    <div class="status" id="status">connecting…</div>
-  </body>
+    <div id="hide-div">
+        <button id="hide" onclick="hide()">Скрыть</button>
+        <!-- <input type="checkbox" id="autoHide">Скрывать автоматически</button> -->
+        <div class="toggle-pill-dark">
+            <input type="checkbox" id="autoHide" name="check" checked="true">
+            <label for="autoHide"></label>
+            <label id="text">Скрывать автоматически</label>
+        </div>
+    </div>
+</body>
+
 </html>

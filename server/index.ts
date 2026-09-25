@@ -5,6 +5,7 @@ import path from 'path';
 import fs from 'fs/promises';
 import process from 'process';
 import os from 'os';
+import open from 'open';
 
 const BASE_DIR = (process as any).pkg
   ? path.dirname(process.execPath)     // рядом с exe
@@ -84,7 +85,7 @@ wss.on('connection', async (ws, req) => {
             try {
                 const watcher = fs.watch(ASSETS_DIR, { });
                 for await (const event of watcher) {
-                    console.log("image files changed: " + event.eventType);
+                    // console.log("image files changed: " + event.eventType);
                     await sendListImages(ws);
                 }
             } 
@@ -100,10 +101,10 @@ wss.on('connection', async (ws, req) => {
         let msg: any;
         try { msg = JSON.parse(raw.toString()); } catch { return; }
 
-        console.log("got message: " + msg.type);
+        // console.log("got message: " + msg.type);
 
         if (msg.type === 'show' && typeof msg.file === 'string') {
-            console.log("autoHide: " + msg.autoHide)
+            // console.log("autoHide: " + msg.autoHide)
             
             const duration = Number.isFinite(msg.duration) ? msg.duration : DEFAULT_DURATION_MS;
             
@@ -128,10 +129,14 @@ app.get('/api/info', (req, res) => {
   });
 });
 
+const testOpen = false;
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server on http://0.0.0.0:${PORT}`);
-  console.log(`Assets dir: ${ASSETS_DIR}`);
+    console.log("SC2 FFA Card Server by nerdError")
+    console.log(`Панель управления: http://localhost:${PORT}`);
+    console.log(`Папка для картинок (assets): ${ASSETS_DIR}`);
+
+    if (process.pkg || testOpen) open(`http://localhost:${PORT}`);
 });
 
 function getLocalIPs(): string[] {

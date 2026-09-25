@@ -5,7 +5,7 @@ const status = document.getElementById('status') as HTMLDivElement;
 const hideButton = document.getElementById('hide') as HTMLDivElement;
 const autoHide = document.getElementById('autoHide') as HTMLInputElement;
 
-const DURATION_MS = 1000;
+const DURATION_MS = 7000;
 
 let ws: WebSocket | null = null;
 
@@ -54,7 +54,9 @@ function connect() {
 
     hideButton.onclick = () => {
         console.log("скрыть");
-        ws.send(JSON.stringify({ type: 'hide' }));
+        if (ws?.readyState === WebSocket.OPEN) {
+            ws.send(JSON.stringify({ type: 'hide' }));
+        }
     }
 }
 
