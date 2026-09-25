@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controller</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            padding: 16px;
+            background: #111;
+            color: #eee;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin: 0 0 12px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        }
+
+        button {
+            padding: 16px;
+            font-size: 15px;
+            cursor: pointer;
+            background: #2a2a2a;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 10px;
+            text-align: left;
+            word-break: break-word;
+        }
+
+        button:active {
+            background: #3a3a3a;
+        }
+
+        .status {
+            font-family: system-ui, sans-serif;
+            font: 12px;
+            color: #0f0;
+            /* margin-top: 12px; */
+        }
+
+        #hide {
+            background: #5a2d2d;
+            border: 1px solid rgb(147, 73, 73)a4a;
+        }
+
+        #hide:active {
+            background: #743a3a;
+        }
+
+        #hide-div {
+            margin-top: 20px;
+            display: grid
+        }
+
+        .toggle-pill-dark {
+            display: flex;
+            margin-top: 15px;
+        }
+
+        .toggle-pill-dark input[type="checkbox"] {
+            display: none;
+        }
+
+        .toggle-pill-dark #text {
+            margin-left: 10px;
+        }
+
+        .toggle-pill-dark input[type="checkbox"]+label {
+            display: block;
+            position: relative;
+            width: 3em;
+            height: 1.6em;
+            margin-bottom: 20px;
+            border-radius: 1em;
+            background: #303e58;
+            box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-transition: background 0.1s ease-in-out;
+            transition: background 0.1s ease-in-out;
+        }
+
+        .toggle-pill-dark input[type="checkbox"]+label:before {
+            content: "";
+            display: block;
+            width: 1.2em;
+            height: 1.2em;
+            border-radius: 1em;
+            background: #e84d4d;
+            position: absolute;
+            left: 0.2em;
+            top: 0.2em;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+            -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+        }
+
+        .toggle-pill-dark input[type="checkbox"]:checked+label:before {
+            background: #47cf73;
+            box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
+            left: 1.6em;
+            -webkit-transform: rotate(295deg);
+            transform: rotate(295deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex;">
+        <h1>Controller</h1>
+        <h1 class="status" id="status" style="margin-left: 10px; opacity: 75%;">  Подключение…</h1>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div id="hide-div">
+        <button id="hide" onclick="hide()">Скрыть</button>
+        <!-- <input type="checkbox" id="autoHide">Скрывать автоматически</button> -->
+        <div class="toggle-pill-dark">
+            <input type="checkbox" id="autoHide" name="check" checked="true">
+            <label for="autoHide"></label>
+            <label id="text">Скрывать автоматически</label>
+        </div>
+    </div>
+    <script type="module" src="/src/controller.ts"></script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viewer</title>
+    <style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+  }
+  #stage {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    overflow: hidden; /* чтобы выезжающая картинка не создавала скролл */
+  }
+  #pic {
+    max-width: 95vw;
+    max-height: 95vh;
+    display: block;
+    opacity: 0;
+    transform: translateX(-110%);   /* спрятана слева за кадром */
+    transition:
+      transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity   350ms ease-out;
+    will-change: transform, opacity;
+    pointer-events: none;
+  }
+  #pic.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+    </style>
+  </head>
+  <body>
+    <div id="stage"><img id="pic" alt="" /></div>
+    <script type="module" src="/src/viewer.ts"></script>
+  </body>
+    
+</html>
