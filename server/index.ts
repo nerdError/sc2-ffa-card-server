@@ -6,6 +6,7 @@ import fs from 'fs/promises';
 import process from 'process';
 import os from 'os';
 import open from 'open';
+import { Direction, ServerMsg, VERSION } from '../shared/types';
 
 const BASE_DIR = (process as any).pkg
   ? path.dirname(process.execPath)     // рядом с exe
@@ -51,13 +52,13 @@ function broadcast(msg: unknown) {
   }
 }
 
-function showImage(file: string, durationMs: number, autoHide: boolean) {
+function showImage(file: string, durationMs: number, version: number, autoHide: boolean, direction: Direction) {
     // сбрасываем предыдущий таймер, если был
     if (hideTimer) clearTimeout(hideTimer);
 
     // console.log("file: " + file);
 
-    broadcast({ type: 'show', file: file, duration: durationMs });
+    broadcast({ type: 'show', file: file, duration: durationMs, version, direction });
 
     if (autoHide) {
         hideTimer = setTimeout(() => {
@@ -98,7 +99,7 @@ wss.on('connection', async (ws, req) => {
     }
 
     ws.on('message', (raw) => {
-        let msg: any;
+        let msg: ServerMsg;
         try { msg = JSON.parse(raw.toString()); } catch { return; }
 
         // console.log("got message: " + msg.type);
@@ -108,7 +109,7 @@ wss.on('connection', async (ws, req) => {
             
             const duration = Number.isFinite(msg.duration) ? msg.duration : DEFAULT_DURATION_MS;
             
-            showImage(msg.file, duration, msg.autoHide);
+            showImage(msg.file, duration, msg.version, msg.autoHide, msg.direction);
         }
 
         if (msg.type == "hide") {
@@ -132,7 +133,7 @@ app.get('/api/info', (req, res) => {
 const testOpen = false;
 
 server.listen(PORT, '0.0.0.0', () => {
-    console.log("SC2 FFA Card Server by nerdError")
+    console.log(`SC2 FFA Card Server v${VERSION} by nerdError`)
     console.log(`Панель управления: http://localhost:${PORT}`);
     console.log(`Папка для картинок (assets): ${ASSETS_DIR}`);
 

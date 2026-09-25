@@ -1,5 +1,0 @@
-import"./modulepreload-polyfill-P2Xu9kJm.js";var e=document.getElementById(`network-list`);function t(e,t,n){let r=document.createElement(`div`);return r.className=`addr`,r.innerHTML=`
-    <code>${e}</code>
-    <a class="btn" href="${t}" target="_blank" rel="noopener">controller (телефон)</a>
-    <a class="btn" href="${n}"     target="_blank" rel="noopener">viewer</a>
-  `,r}async function n(){try{let n=await fetch(`/api/info`);if(!n.ok)throw Error(`HTTP ${n.status}`);let r=await n.json();if(e.innerHTML=``,r.ips.length===0){e.innerHTML=`<span id="error">Сетевой IP не найден. Проверьте подключение к сети.</span>`;return}for(let n=0;n<r.ips.length;n++)e.appendChild(t(r.ips[n],r.controllerUrls[n],r.viewerUrls[n]))}catch(t){e.innerHTML=`<span id="error">Не удалось получить IP: ${t.message}</span>`}}n();

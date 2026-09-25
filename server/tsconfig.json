@@ -6,7 +6,8 @@
     "lib": ["ES2022", "DOM"],
 
     "outDir": "./dist",
-    "rootDir": ".",
+    "rootDir": "..",
+
 
     "strict": true,
     "esModuleInterop": true,
@@ -19,6 +20,6 @@
 
     "types": ["node"]
   },
-  "include": ["**/*.ts"],
+  "include": ["../server/*.ts", "../shared/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
